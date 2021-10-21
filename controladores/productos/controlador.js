@@ -12,7 +12,7 @@ await baseDeDatos
 
 const crearProducto = async (datosProductos, callback) => {
         if (
-            Object.keys(datosProductos).includes('product') &&
+            Object.keys(datosProductos).includes('Product') &&
             Object.keys(datosProductos).includes('mark') &&            //Campos obligatorios que se deben cumplir para poder agregar un nuevo producto
             Object.keys(datosProductos).includes('ServingSizes') &&
             Object.keys(datosProductos).includes('Size') &&
@@ -21,9 +21,12 @@ const crearProducto = async (datosProductos, callback) => {
 
             //código para crear un producto en la bd, colección inventory
             const baseDeDatos = getDB();
-            await baseDeDatos.collection('inventory').insertOne(datosProductos, callback);
+            await baseDeDatos.collection('inventory').insertOne(datosProductos, (callback));
         } else {
-            return 'error';
+            callback({
+                message: 'Las llaves del producto no son validas',
+                status: 400,
+            });
         }
 };
 

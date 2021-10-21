@@ -7,9 +7,11 @@ import { editarProducto,
 
 const rutasProducto = Express.Router();
 
-const genericCallback = (res) => (err, result) => {  //función anidada que puede ser reutilizada en todos los modelos, manda al front un error en forma de status o un resultado como archivo json
-        if(err) {
-            res.status(500).send('Error consultando los productos')
+const genericCallback = (res) => (err, result) => {
+  //función anidada que puede ser reutilizada en todos los modelos, manda al front un error en forma de status o un resultado como archivo json
+  console.log(err)      
+  if(err) {
+            res.status(err.status).send(err.message)
         } else {
             res.json(result);
         }
@@ -23,7 +25,8 @@ rutasProducto.route('/productos').get((req, res) => {
     queryAllProducts(genericCallback(res));
 });
 
-rutasProducto.route('/productos').post((req,res) =>{   //agregar un nuevo producto en la bd, con unos campos obligatorios.
+rutasProducto.route('/productos').post((req,res) =>{ 
+  //agregar un nuevo producto en la bd, con unos campos obligatorios.
     crearProducto(req.body, genericCallback(res));
    
 });
