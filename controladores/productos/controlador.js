@@ -6,7 +6,8 @@ const queryAllProducts = async (callback) => {  //controlador que muestra todos 
 const baseDeDatos = getDB();
 await baseDeDatos
 .collection('inventory')
-.find({}) //aquí puedo agregar filtros de búsqueda
+.find() //aquí puedo agregar filtros de búsqueda
+.limit(50)
 .toArray(callback);
 };
 
