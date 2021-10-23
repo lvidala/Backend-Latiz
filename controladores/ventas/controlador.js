@@ -16,7 +16,7 @@ const crearVenta = async (datosVenta, callback) => {
     await baseDeDatos.collection('sales').insertOne(datosVenta, callback);
   };
 
-const consultarVenta = async (id,callback) => { //controlador que muestra un solo Venta.
+const consultarVenta = async (id,callback) => { //controlador que muestra una solo Venta.
     const baseDeDatos = getDB(); 
 await baseDeDatos
 .collection('sales')
