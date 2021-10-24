@@ -11,6 +11,8 @@ await baseDeDatos
 .toArray(callback);
 };
 
+
+
 const crearVenta = async (datosVenta, callback) => {
     const baseDeDatos = getDB();
     await baseDeDatos.collection('sales').insertOne(datosVenta, callback);

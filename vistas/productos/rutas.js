@@ -3,7 +3,8 @@ import { editarProducto,
     queryAllProducts, 
     crearProducto, 
     eliminarProducto, 
-    consultarProducto } from '../../controladores/productos/controlador.js';
+    consultarProductoPorNombre,
+consultarProductoPorId } from '../../controladores/productos/controlador.js';
 
 const rutasProducto = Express.Router();
 
@@ -33,8 +34,14 @@ rutasProducto.route('/productos').post((req,res) =>{
 
 rutasProducto.route('/productos/:id').get((req, res) => {
     console.log('alguien hizo get one product en la ruta /productos');
-    consultarProducto(req.params.id, genericCallback(res));
+    consultarProductoPorId(req.params.id, genericCallback(res));
 });
+
+rutasProducto.route('/productos/name').get((req, res) => {
+    console.log('alguien hizo get one product en la ruta /productos');
+    console.log(URL.parse(req.url))
+    // consultarProductoPorNombre(req.query.name, genericCallback(res));
+}); //cambiar por product
 
 
 rutasProducto.route('/productos/:id').patch((req, res) => {   //

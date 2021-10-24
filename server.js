@@ -5,8 +5,9 @@ import { conectarBD } from './db/db.js';
 import rutasProducto from './vistas/productos/rutas.js';
 import rutasUsuario from './vistas/usuarios/rutas.js'
 import rutasVenta from './vistas/ventas/rutas.js';
-import jwt from 'express-jwt';
-import jwks from 'jwks-rsa'
+// import jwt from 'express-jwt';
+// import jwks from 'jwks-rsa'
+// import autorizacionEstadoUsuario from './middleware/autorizacionEstadoUsuario.js';
 
 
 
@@ -16,19 +17,20 @@ const app = Express(); //aquí se agrega todo lo que necesitamos.
 app.use(Express.json());  //convierte en objetos json lo que llegue del request.
 app.use(Cors());
 
-var jwtCheck = jwt({ //este código me permite proteger las rutas, permite la autenticación a quien tenga un token válido
-    secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: 'https://dev-vq1hj1gm.us.auth0.com/.well-known/jwks.json' //endpoint con tokens que auth0 ya conocer
-  }),
-  audience: 'api-autenticacion-latiz', //identificación del API
-  issuer: 'https://dev-vq1hj1gm.us.auth0.com/',
-  algorithms: ['RS256']
-});
+// var jwtCheck = jwt({ //este código es un middleware que revisa el token de Auth0 y verifica si es válido o no
+//     secret: jwks.expressJwtSecret({
+//         cache: true,
+//         rateLimit: true,
+//         jwksRequestsPerMinute: 5,
+//         jwksUri: 'https://dev-vq1hj1gm.us.auth0.com/.well-known/jwks.json' //endpoint con tokens que auth0 ya conocer
+//   }),
+//   audience: 'api-autenticacion-latiz', //identificación del API
+//   issuer: 'https://dev-vq1hj1gm.us.auth0.com/',
+//   algorithms: ['RS256']
+// });
 
-app.use(jwtCheck);
+// app.use(jwtCheck);
+// app.use(autorizacionEstadoUsuario); //middleware
 
 app.use(rutasProducto);
 app.use(rutasUsuario);

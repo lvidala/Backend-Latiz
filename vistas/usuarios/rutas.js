@@ -3,7 +3,9 @@ import { editarUsuario,
     queryAllUsers, 
     crearUsuario, 
     eliminarUsuario, 
-    consultarUsuario } from '../../controladores/usuarios/controlador.js';
+    consultarUsuario 
+    // consultarOCrearUsuario
+} from '../../controladores/usuarios/controlador.js';
 
 const rutasUsuario = Express.Router();
 
@@ -29,6 +31,12 @@ rutasUsuario.route('/usuarios').post((req,res) =>{
   //agregar un nuevo Usuario en la bd, con unos campos obligatorios.
     crearUsuario(req.body, genericCallback(res));
    
+});
+
+rutasUsuario.route('/usuarios/self').get((req, res) => {
+    console.log('alguien hizo get en la ruta /self');       //ruta self --- donde está la info personal de cada usuario
+    consultarOCrearUsuario(req, genericCallback(res));
+    //consultarUsuario(req.params.id, genericCallback(res));
 });
 
 rutasUsuario.route('/usuarios/:id').get((req, res) => {
