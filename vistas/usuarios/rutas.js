@@ -28,6 +28,7 @@ rutasUsuario.route('/users').get((req, res) => {
 
 //CREATE AN USER
 rutasUsuario.route('/users/create').post((req,res) =>{ 
+    console.log('alguien hizo get en la ruta /users/create');
     crearUsuario(req.body, genericCallback(res));
    
 });
@@ -47,7 +48,7 @@ rutasUsuario.route('/users/:id').get((req, res) => {
 
 //EDIT USER
 rutasUsuario.route('/users/edit/:id').patch((req, res) => {   //
-    console.log('alguien hizo patch en la ruta /users/editar');
+    console.log('alguien hizo patch en la ruta /users/edit');
     editarUsuario(req.params.id, req.body, genericCallback(res));
 
 });

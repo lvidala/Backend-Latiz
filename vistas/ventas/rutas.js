@@ -39,7 +39,7 @@ rutasVenta.route('/sales/:id').get((req, res) => {
 
 //EDIT SALE BY ID
 rutasVenta.route('/sales/edit/:id').patch((req, res) => {   //
-    console.log('alguien hizo patch en la ruta /sales/editar');
+    console.log('alguien hizo patch en la ruta /sales/edit');
     editarVenta(req.params.id, req.body, genericCallback(res));
 
 });
