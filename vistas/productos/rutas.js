@@ -21,36 +21,33 @@ const genericCallback = (res) => (err, result) => {
 
 //las rutas se manejaron de forma dinámica, para poder ejecutar patch y delete necesitamos un id obligatorio para obtener la información del producto específico.
 
-rutasProducto.route('/productos').get((req, res) => {
+//GET ALL PRODUCTS
+rutasProducto.get('/',(req, res) => {
     console.log('alguien hizo get en la ruta /productos');
-    queryAllProducts(genericCallback(res));
+    queryAllProducts(genericCallback(res))
 });
 
-rutasProducto.route('/productos').post((req,res) =>{ 
-  //agregar un nuevo producto en la bd, con unos campos obligatorios.
+//CREATE A PRODUCT
+rutasProducto.post('/create',(req,res) =>{ 
     crearProducto(req.body, genericCallback(res));
    
 });
 
-rutasProducto.route('/productos/:id').get((req, res) => {
+//SEARCH PRODUCT BY ID
+rutasProducto.get('/:id',(req, res) => {
     console.log('alguien hizo get one product en la ruta /productos');
     consultarProductoPorId(req.params.id, genericCallback(res));
 });
 
-rutasProducto.route('/productos/name').get((req, res) => {
-    console.log('alguien hizo get one product en la ruta /productos');
-    console.log(URL.parse(req.url))
-    // consultarProductoPorNombre(req.query.name, genericCallback(res));
-}); //cambiar por product
-
-
-rutasProducto.route('/productos/:id').patch((req, res) => {   //
+//EDIT ELEMENT BY ID
+rutasProducto.patch('/edit/:id',(req, res) => {   //
     console.log('alguien hizo patch en la ruta /productos/editar');
     editarProducto(req.params.id, req.body, genericCallback(res));
 
 });
 
-rutasProducto.route('/productos/:id').delete((req, res) => {
+//DELETE PRODUCT BY ID
+rutasProducto.delete('/delete/:id',(req, res) => {
     console.log('alguien hizo delete en la ruta /productos/eliminar');
     eliminarProducto(req.params.id, genericCallback(res));
 });

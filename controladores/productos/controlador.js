@@ -2,16 +2,22 @@ import { getDB } from '../../db/db.js';
 import { ObjectId } from 'mongodb';
 
 
-export const queryAllProducts = async (callback) => {  //controlador que muestra todos los productos.
+export const queryAllProducts = async (queryParams, callback) => {  //controlador que muestra todos los productos.
+    
+    const filters = {
+        ...(queryParams.name) && {Product: {$regex: new RegExp(queryParams.name, 'i')} || null}
+    }
+    
+    
     const baseDeDatos = getDB();
     await baseDeDatos
     .collection('inventory')
-    .find() //aquí puedo agregar filtros de búsqueda
-    .limit(50) //cuántos archivos enviar
+    .find(filters) //aquí puedo agregar filtros de búsqueda
     .toArray(callback);
 };
 
 export const crearProducto = async (datosProductos, callback) => {
+    console.log(datosProductos)
         if (
             Object.keys(datosProductos).includes('Product') &&
             Object.keys(datosProductos).includes('mark') &&            //Campos obligatorios que se deben cumplir para poder agregar un nuevo producto
@@ -43,7 +49,7 @@ export const consultarProductoPorNombre = async (name,callback) => { //controlad
     const baseDeDatos = getDB(); 
 await baseDeDatos
 .collection('inventory')
-.find({'Product': 'Yogurth'}, callback);
+.find({'Product': name}, callback);
 };
 
 
