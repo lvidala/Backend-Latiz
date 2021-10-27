@@ -2,11 +2,7 @@ import { getDB } from '../../db/db.js';
 import { ObjectId } from 'mongodb';
 
 
-<<<<<<< HEAD
 export const listarVentas = async (callback) => {  //controlador que muestra todos los Ventas.
-=======
-export const queryAllSales = async (callback) => {  //controlador que muestra todos los Ventas.
->>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
 const baseDeDatos = getDB();
 await baseDeDatos
 .collection('sales')
