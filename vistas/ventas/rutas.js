@@ -2,7 +2,6 @@ import Express from 'express';
 import { editarVenta, 
     queryAllSales, 
     crearVenta, 
-    eliminarVenta, 
     consultarVenta } from '../../controladores/ventas/controlador.js';
 
 const rutasVenta = Express.Router();
@@ -20,32 +19,31 @@ const genericCallback = (res) => (err, result) => {
 
 //las rutas se manejaron de forma dinámica, para poder ejecutar patch y delete necesitamos un id obligatorio para obtener la información del Venta específico.
 
-rutasVenta.route('/ventas').get((req, res) => {
+
+//GET ALL SALES
+rutasVenta.get('/',(req, res) => {
     console.log('alguien hizo get en la ruta /ventas');
     queryAllSales(genericCallback(res));
 });
 
-rutasVenta.route('/ventas').post((req,res) =>{ 
-  //agregar un nuevo Venta en la bd, con unos campos obligatorios.
+
+//CREATE A SALE
+rutasVenta.post('/create',(req,res) =>{ 
     crearVenta(req.body, genericCallback(res));
    
 });
 
-rutasVenta.route('/ventas/:id').get((req, res) => {
-    console.log('alguien hizo get one user en la ruta /ventas');
+//SEARCH SALE 
+rutasVenta.get('/:id',(req, res) => {
     consultarVenta(req.params.id, genericCallback(res));
 });
 
-
-rutasVenta.route('/ventas/:id').patch((req, res) => {   //
+//EDIT SALE
+rutasVenta.route('/edit/:id',(req, res) => {   //
     console.log('alguien hizo patch en la ruta /ventas/editar');
     editarVenta(req.params.id, req.body, genericCallback(res));
 
 });
 
-rutasVenta.route('/ventas/:id').delete((req, res) => {
-    console.log('alguien hizo delete en la ruta /ventas/eliminar');
-    eliminarVenta(req.params.id, genericCallback(res));
-});
 
 export default rutasVenta;
