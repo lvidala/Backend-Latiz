@@ -2,6 +2,7 @@ import { getDB } from '../../db/db.js';
 import { ObjectId } from 'mongodb';
 
 
+<<<<<<< HEAD
 export const listarProductos = async (queryParams, callback) => {  //controlador que muestra todos los productos.
     
     const filters = {
@@ -14,9 +15,29 @@ export const listarProductos = async (queryParams, callback) => {  //controlador
     .collection('inventory')
     .find(filters) //aquí puedo agregar filtros de búsqueda
     .toArray(callback);
+=======
+export const queryAllProducts = async (queryParams,callback) => {  //controlador que muestra todos los productos.
+    
+
+    const filters = {
+        ...(queryParams.name) && {Product: {$regex: new RegExp(queryParams.name,'i')} || null}
+    }
+
+    const baseDeDatos = getDB();
+    await baseDeDatos
+        .collection('inventory')
+        .find(filters)
+        .toArray(callback);
+    
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
 };
 
+
 export const crearProducto = async (datosProductos, callback) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
     console.log(datosProductos)
         if (
             Object.keys(datosProductos).includes('Product') &&
@@ -49,7 +70,11 @@ export const consultarProductoPorNombre = async (name,callback) => { //controlad
     const baseDeDatos = getDB(); 
 await baseDeDatos
 .collection('inventory')
+<<<<<<< HEAD
 .find({'Product': name}, callback);
+=======
+.find({Product}, callback);
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
 };
 
 

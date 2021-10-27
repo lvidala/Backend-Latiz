@@ -4,7 +4,11 @@ import { ObjectId } from 'mongodb';
 //import { response } from 'express';
 
 
+<<<<<<< HEAD
 export const listarUsuarios = async (callback) => {  //controlador que muestra todos los Usuarios.
+=======
+export const queryAllUsers = async (callback) => {  //controlador que muestra todos los Usuarios.
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
 const baseDeDatos = getDB();
 await baseDeDatos
 .collection('users')
@@ -59,4 +63,7 @@ export const editarUsuario = async (id, edicion, callback) => {
     .findOneAndUpdate(filtroUsuario, operacion, {upsert: true, returnOriginal: true}, callback);
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6

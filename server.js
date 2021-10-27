@@ -14,10 +14,17 @@ import rutasVenta from './vistas/ventas/rutas.js';
 dotenv.config({path: './.env'});
 
 const app = Express(); //aquí se agrega todo lo que necesitamos.
+<<<<<<< HEAD
 //const Cors = require('cors');
 
 app.use(Express.json());  //convierte en objetos json lo que llegue del request.
 app.use(Cors());
+=======
+
+
+app.use(Cors());
+app.use(Express.json());  //convierte en objetos json lo que llegue del request.
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
 app.use(Express.urlencoded({extended:false}))
 
 // var jwtCheck = jwt({ //este código es un middleware que revisa el token de Auth0 y verifica si es válido o no
@@ -35,11 +42,19 @@ app.use(Express.urlencoded({extended:false}))
 // app.use(jwtCheck);
 // app.use(autorizacionEstadoUsuario); //middleware
 
+<<<<<<< HEAD
 app.use(rutasProducto);
 app.use(rutasUsuario);
 app.use(rutasVenta);
 
 app.get('/',(req,res) => {
+=======
+app.use('/products',rutasProducto);
+app.use('/users',rutasUsuario);
+app.use('/sales',rutasVenta)
+
+app.get('/',(req,res)=>{
+>>>>>>> 0e83f63e9d7f81c450c5b6da303a4b0a658739d6
     res.json({connected:true})
 })
 
