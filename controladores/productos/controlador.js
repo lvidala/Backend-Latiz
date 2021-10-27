@@ -2,7 +2,7 @@ import { getDB } from '../../db/db.js';
 import { ObjectId } from 'mongodb';
 
 
-export const queryAllProducts = async (queryParams, callback) => {  //controlador que muestra todos los productos.
+export const listarProductos = async (queryParams, callback) => {  //controlador que muestra todos los productos.
     
     const filters = {
         ...(queryParams.name) && {Product: {$regex: new RegExp(queryParams.name, 'i')} || null}
@@ -71,4 +71,3 @@ export const eliminarProducto = async (id, callback) => {
     await baseDeDatos.collection('inventory').deleteOne(filtroProducto, callback);
   };
 
-// export { queryAllProducts, crearProducto, editarProducto, eliminarProducto, consultarProductoPorId, consultarProductoPorNombre}; 

@@ -1,10 +1,9 @@
 import Express from 'express';
 import { editarProducto, 
-    queryAllProducts, 
     crearProducto, 
     eliminarProducto, 
-    consultarProductoPorNombre,
-consultarProductoPorId } from '../../controladores/productos/controlador.js';
+consultarProductoPorId, 
+listarProductos} from '../../controladores/productos/controlador.js';
 
 const rutasProducto = Express.Router();
 
@@ -22,33 +21,33 @@ const genericCallback = (res) => (err, result) => {
 //las rutas se manejaron de forma dinámica, para poder ejecutar patch y delete necesitamos un id obligatorio para obtener la información del producto específico.
 
 //GET ALL PRODUCTS
-rutasProducto.get('/',(req, res) => {
-    console.log('alguien hizo get en la ruta /productos');
-    queryAllProducts(genericCallback(res))
+rutasProducto.route('/products').get((req, res) => {
+    console.log('alguien hizo get en la ruta /products');
+    listarProductos(genericCallback(res))
 });
 
 //CREATE A PRODUCT
-rutasProducto.post('/create',(req,res) =>{ 
+rutasProducto.route('/products/create').post((req,res) =>{ 
     crearProducto(req.body, genericCallback(res));
    
 });
 
 //SEARCH PRODUCT BY ID
-rutasProducto.get('/:id',(req, res) => {
-    console.log('alguien hizo get one product en la ruta /productos');
+rutasProducto.route('/products/:id').get((req, res) => {
+    console.log('alguien hizo get by id en la ruta /products');
     consultarProductoPorId(req.params.id, genericCallback(res));
 });
 
 //EDIT ELEMENT BY ID
-rutasProducto.patch('/edit/:id',(req, res) => {   //
-    console.log('alguien hizo patch en la ruta /productos/editar');
+rutasProducto.route('/products/edit/:id').patch((req, res) => {   
+    console.log('alguien hizo patch en la ruta /productss/edit');
     editarProducto(req.params.id, req.body, genericCallback(res));
 
 });
 
 //DELETE PRODUCT BY ID
-rutasProducto.delete('/delete/:id',(req, res) => {
-    console.log('alguien hizo delete en la ruta /productos/eliminar');
+rutasProducto.route('/products/delete/:id').delete((req, res) => {
+    console.log('alguien hizo delete en la ruta /products/delete');
     eliminarProducto(req.params.id, genericCallback(res));
 });
 

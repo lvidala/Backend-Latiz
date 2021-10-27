@@ -1,4 +1,4 @@
-import Express from 'express'; //import de express con type: module. También se puede express const express = require ('express')
+import Express from 'express'; 
 import Cors from 'cors'; //poder compartir recursos entre varios origines diferentes.
 import dotenv from 'dotenv';
 import { conectarBD } from './db/db.js';
@@ -14,7 +14,7 @@ import rutasVenta from './vistas/ventas/rutas.js';
 dotenv.config({path: './.env'});
 
 const app = Express(); //aquí se agrega todo lo que necesitamos.
-
+//const Cors = require('cors');
 
 app.use(Express.json());  //convierte en objetos json lo que llegue del request.
 app.use(Cors());
@@ -35,9 +35,9 @@ app.use(Express.urlencoded({extended:false}))
 // app.use(jwtCheck);
 // app.use(autorizacionEstadoUsuario); //middleware
 
-app.use('/products',rutasProducto);
+app.use(rutasProducto);
 app.use(rutasUsuario);
-app.use(rutasVenta)
+app.use(rutasVenta);
 
 app.get('/',(req,res) => {
     res.json({connected:true})
