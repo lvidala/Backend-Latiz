@@ -16,7 +16,7 @@ dotenv.config({path: './.env'});
 const app = Express(); //aquí se agrega todo lo que necesitamos.
 //const Cors = require('cors');
 
-app.use(Cors());
+app.use(cors());
 app.use(Express.json());  //convierte en objetos json lo que llegue del request.
 app.use(Express.urlencoded({extended:false}))
 
