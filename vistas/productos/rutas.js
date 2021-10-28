@@ -3,6 +3,7 @@ import { editarProducto,
     crearProducto, 
     eliminarProducto, 
 consultarProductoPorId, 
+consultarProductoPorNombre,
 listarProductos} from '../../controladores/productos/controlador.js';
 
 const rutasProducto = Express.Router();
@@ -36,6 +37,12 @@ rutasProducto.route('/products/create').post((req,res) =>{
 rutasProducto.route('/products/:id').get((req, res) => {
     console.log('alguien hizo get by id en la ruta /products');
     consultarProductoPorId(req.params.id, genericCallback(res));
+});
+
+//SEARCH PRODUCT BY NAME
+rutasProducto.route('/products/:id').get((req, res) => {
+    console.log('alguien hizo get by id en la ruta /products');
+    consultarProductoPorNombre(req.params.id, genericCallback(res));
 });
 
 //EDIT ELEMENT BY ID
