@@ -1,5 +1,5 @@
 import Express from 'express'; 
-//import Cors from 'cors'; //poder compartir recursos entre varios origines diferentes.
+import Cors from 'cors'; //poder compartir recursos entre varios origines diferentes.
 import dotenv from 'dotenv';
 import { conectarBD } from './db/db.js';
 import rutasProducto from './vistas/productos/rutas.js';
@@ -16,8 +16,8 @@ dotenv.config({path: './.env'});
 const app = Express(); //aquí se agrega todo lo que necesitamos.
 //const Cors = require('cors');
 
+app.use(Cors());
 app.use(Express.json());  //convierte en objetos json lo que llegue del request.
-//app.use(Cors());
 app.use(Express.urlencoded({extended:false}))
 
 // var jwtCheck = jwt({ //este código es un middleware que revisa el token de Auth0 y verifica si es válido o no
